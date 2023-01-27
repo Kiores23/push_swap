@@ -1,21 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_create_tab.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/27 15:42:19 by amery             #+#    #+#             */
+/*   Updated: 2023/01/27 15:45:12 by amery            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-int free_tab(t_tab ab)
+int	free_tab(t_tab ab)
 {
 	if (ab.a)
 		free(ab.a);
 	if (ab.b)
 		free(ab.b);
+	ft_putchar('\n');
+	system("leaks push_swap | tail -n2");
 	return (0);
 }
 
-#include <stdio.h>
-
-int *create_a(char **tab, int size)
+int	*create_a(char **tab, int size)
 {
-	int *a;
-	int i;
+	int	*a;
+	int	i;
 
 	a = malloc(sizeof(int) * size);
 	i = -1;
@@ -24,9 +35,9 @@ int *create_a(char **tab, int size)
 	return (a);
 }
 
-int *create_b(int size)
+int	*create_b(int size)
 {
-	int *b;
+	int	*b;
 
 	b = malloc(sizeof(int) * size);
 	ft_bzero(b, size);

@@ -1,12 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/27 15:42:32 by amery             #+#    #+#             */
+/*   Updated: 2023/01/27 17:08:10 by amery            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-int *get_next_smaller(int *tab, int size)
+void	choice_fun(t_tab ab, void (*f)(t_tab, char *), char *cmd)
 {
-	static int  init = 0;
-	static int  n = 0;
-	int 		i;
-	int 		tmp;
+	int	i;
+
+	ft_putstr("-----------------------------------------------\n");
+	ft_putstr(cmd);
+	ft_putchar('\n');
+	f(ab, cmd);
+	ab.sa = *ab.psa;
+	ab.sb = *ab.psb;
+	i = -1;
+	while (++i < ab.sa || i < ab.sb)
+	{
+		ft_putchar('\n');
+		if (i < ab.sa)
+			ft_putnbr(ab.a[i]);
+		else
+			ft_putchar(' ');
+		ft_putchar('\t');
+		if (i < ab.sb)
+			ft_putnbr(ab.b[i]);
+	}
+	ft_putstr("\n_\t_\na\tb\n");
+}
+
+void	sort_rotate(t_tab ab, t_fun f)
+{
+	t_v	var;
+
+	var.i = 0;
+	var.j = ab.sa;
+	var.n = 0;
+	while (!ft_issorta(ab.a, ab.sa, var.i++) && !ft_issorta(ab.a, ab.sa, var.j--) 
+			&& var.n <= ab.sa / 2)
+			var.n++;
+	if (var.n > ab.sa / 2)
+		return ;
+	while (var.i > (var.j - ab.sa) * (-1) && var.n--)
+		choice_fun(ab, &rotate, "ra");
+	while (var.i <= (var.j - ab.sa) * (-1) && var.n--)
+		choice_fun(ab, &rotate, "rra");
+}
+
+int	*get_next_smaller(int *tab, int size)
+{
+	static int	init = 0;
+	static int	n = 0;
+	int			i;
+	int			tmp;
 	int			tmp2;
 
 	i = 0;
@@ -27,7 +81,7 @@ int *get_next_smaller(int *tab, int size)
 			n = tmp;
 	}
 	init = 1;
-	if (n = tmp2)
+	if (n == tmp2)
 		return (NULL);
 	return (&tab[n]);
 }

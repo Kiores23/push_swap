@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_function.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/27 15:42:24 by amery             #+#    #+#             */
+/*   Updated: 2023/01/27 15:45:32 by amery            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void	rotate_reverse(t_tab ab, char *cmd);
 
-t_tab choice(t_tab ab, char c)
+t_tab	choice(t_tab ab, char c)
 {
 	if (c == 'a')
 	{
