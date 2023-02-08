@@ -1,0 +1,18 @@
+while a not ordered :
+    Retrieve min value
+    Retrieve max value
+    if min and max next to each other :
+        bring min to the top
+        if a not ordered :
+            push a to b
+    else :
+        if min closer to top than max to bottom or max already at bottom;
+            bring min to the top
+            if a not ordered :
+                push a to b
+        else :
+            rotate till max to the bottom
+            reduce list length
+
+while b not empty :
+    push b to a
