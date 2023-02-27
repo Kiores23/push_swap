@@ -50,10 +50,13 @@ void	rotate(t_tab ab, char *cmd);
 void	choice_fun(t_tab ab, void (*f)(t_tab, char *), char *cmd);
 void	sort_rotate(t_tab ab, t_fun f);
 void	sort(t_tab ab, t_fun f);
+void	sort_goto(t_tab ab, t_fun f, int nb);
 int		ps_verif(char **a, int size);
 int		*create_a(char **tab, int size);
 int		*create_b(int size);
 int		free_tab(t_tab ab);
+int		get_indexsmallest(int *tab, int size);
+int		get_indexbiggest(int *tab, int size);
 int		*get_next_smaller(int *tab, int size);
 
 #endif

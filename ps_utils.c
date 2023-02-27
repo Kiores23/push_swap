@@ -16,14 +16,14 @@ void	choice_fun(t_tab ab, void (*f)(t_tab, char *), char *cmd)
 {
 	int	i;
 
-	ft_putstr("-----------------------------------------------\n");
+	//ft_putstr("-----------------------------------------------\n");
 	ft_putstr(cmd);
 	ft_putchar('\n');
 	f(ab, cmd);
 	ab.sa = *ab.psa;
 	ab.sb = *ab.psb;
 	i = -1;
-	while (++i < ab.sa || i < ab.sb)
+	/*while (++i < ab.sa || i < ab.sb)
 	{
 		ft_putchar('\n');
 		if (i < ab.sa)
@@ -33,8 +33,8 @@ void	choice_fun(t_tab ab, void (*f)(t_tab, char *), char *cmd)
 		ft_putchar('\t');
 		if (i < ab.sb)
 			ft_putnbr(ab.b[i]);
-	}
-	ft_putstr("\n_\t_\na\tb\n");
+	}*/
+	//ft_putstr("\n_\t_\na\tb\n");
 }
 
 void	sort_rotate(t_tab ab, t_fun f)
@@ -53,6 +53,54 @@ void	sort_rotate(t_tab ab, t_fun f)
 		choice_fun(ab, &rotate, "ra");
 	while (var.i <= (var.j - ab.sa) * (-1) && var.n--)
 		choice_fun(ab, &rotate, "rra");
+}
+
+void	sort_goto(t_tab ab, t_fun f, int nb)
+{
+	t_v	var;
+
+	var.i = 0;
+	var.j = ab.sa;
+	var.n = 0;
+	while (ab.a[var.i++] != nb && ab.a[var.j--] != nb
+			&& var.n < ab.sa)
+			var.n++;
+	if (var.n == ab.sa || var.n == 0)
+		return ;
+	while (var.i > (var.j - ab.sa) * (-1) && var.n--)
+		choice_fun(ab, &rotate, "ra");
+	while (var.i <= (var.j - ab.sa) * (-1) && var.n--)
+		choice_fun(ab, &rotate, "rra");
+}
+
+int	get_indexsmallest(int *tab, int size)
+{
+	int	n;
+	int	i;
+
+	n = 0;
+	i = 0;
+	while (++i < size)
+	{
+		if (tab[i] < tab[n])
+			n = i;
+	}
+	return (n);
+}
+
+int	get_indexbiggest(int *tab, int size)
+{
+	int	n;
+	int	i;
+
+	n = 0;
+	i = 0;
+	while (++i < size)
+	{
+		if (tab[i] > tab[n])
+			n = i;
+	}
+	return (n);
 }
 
 int	*get_next_smaller(int *tab, int size)

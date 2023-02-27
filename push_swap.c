@@ -33,7 +33,7 @@ int	main(int argc, char *argv[])
 	if (!ab.a || !ab.b)
 		return (free_tab(ab) + ft_rerror());
 	sort(ab, f);
-	i = -1;
+	/*i = -1;
 	while (++i < ab.sa || i < ab.sb)
 	{
 		ft_putchar('\n');
@@ -45,6 +45,6 @@ int	main(int argc, char *argv[])
 		if (i < ab.sb)
 			ft_putnbr(ab.b[i]);
 	}
-	ft_putstr("\n_\t_\na\tb\n");
+	ft_putstr("\n_\t_\na\tb\n");*/
 	return (free_tab(ab));
 }

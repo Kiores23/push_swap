@@ -18,8 +18,8 @@ int	free_tab(t_tab ab)
 		free(ab.a);
 	if (ab.b)
 		free(ab.b);
-	ft_putchar('\n');
-	system("leaks push_swap | tail -n2");
+	//ft_putchar('\n');
+	//system("leaks push_swap | tail -n2");
 	return (0);
 }
 

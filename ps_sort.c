@@ -12,31 +12,42 @@
 
 #include "push_swap.h"
 
-void	sort3(t_tab ab, t_fun f)
+void	sort_end(t_tab ab, t_fun f)
 {
-	if (ft_issorta(ab.a, ab.sa, 0))
-		return ;
-	sort_rotate(ab, f);
-	if (ab.a[0] > ab.a[1])
-		choice_fun(ab, &swap, "sa");
-	sort3 (ab, f);
-}
-
-void	sort5(t_tab ab, t_fun f)
-{
-	sort_rotate(ab, f);
-	return ;
+	ab.sb = *ab.psb;
+	while (ab.sb)
+	{
+		ab.sa = *ab.psa;
+		choice_fun(ab, &push, "pa");
+		ab.sb = *ab.psb;
+	}
 }
 
 void	sort(t_tab ab, t_fun f)
 {
+	int	i_min;
+	int	i_max;
+
 	ab.sa = *ab.psa;
 	ab.sb = *ab.psb;
-	if (ft_issorta(ab.a, ab.sa, 0) && !ab.sb)
-		return (ft_putstr("-----------------------------------------------\nIs sort\n"));
-	else if (ab.sa <= 3 && ab.sb == 0)
-		sort3(ab, f);
-	else if (ab.sa <= 5)
-		sort5(ab, f);
-	return (sort(ab, f));
+	if (ft_issorta(ab.a, ab.sa, 0))
+		return (sort_end(ab, f));
+	i_max = get_indexbiggest(ab.a, ab.sa);
+	i_min = get_indexsmallest(ab.a, ab.sa);
+	if(i_max - i_min == 1 || i_max - i_min == -1
+		|| i_max - i_min == ab.sa - 1 || i_max - i_min == (ab.sa - 1) * -1
+		|| i_min <= ab.sa - i_max - 1 || i_max != ab.sa)
+	{
+		sort_goto(ab, f, ab.a[i_min]);
+		if (!ft_issorta(ab.a, ab.sa, 0))
+			choice_fun(ab, &push, "pb");
+	}
+	else
+	{
+		i_max = i_max - ab.sa + 1;
+		if (i_max < 0)
+			i_max = ab.sa + i_max;
+		sort_goto(ab, f, ab.a[i_max]);
+	}
+	sort(ab, f);
 }
