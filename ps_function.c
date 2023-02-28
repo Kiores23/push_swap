@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:42:24 by amery             #+#    #+#             */
-/*   Updated: 2023/01/27 15:45:32 by amery            ###   ########.fr       */
+/*   Updated: 2023/02/28 14:31:36 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	swap(t_tab ab, char *cmd)
 		ab = choice(ab, 'a');
 	else if (!ft_strcmp(cmd, "sb") && ab.sb > 1)
 		ab = choice(ab, 'b');
-	if (!*ab.c)
+	else
 		return ;
 	tmp = ab.c[1];
 	ab.c[1] = ab.c[0];

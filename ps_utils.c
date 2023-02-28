@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:42:32 by amery             #+#    #+#             */
-/*   Updated: 2023/01/27 17:08:10 by amery            ###   ########.fr       */
+/*   Updated: 2023/02/28 19:14:24 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	sort_goto(t_tab ab, t_fun f, int nb)
 	var.i = 0;
 	var.j = ab.sa;
 	var.n = 0;
-	while (ab.a[var.i++] != nb && ab.a[var.j--] != nb
-			&& var.n < ab.sa)
+	while (ab.a[var.i++] != nb && (ab.a[var.j--] != nb
+			|| var.j + 1 == ab.sa) && var.n < ab.sa )
 			var.n++;
 	if (var.n == ab.sa || var.n == 0)
 		return ;
@@ -73,24 +73,43 @@ void	sort_goto(t_tab ab, t_fun f, int nb)
 		choice_fun(ab, &rotate, "rra");
 }
 
-int	get_indexsmallest(int *tab, int size)
+int	get_nnsmallest(int *tab, int n, int size)
 {
-	int	n;
+	int	it1;
+	int	it2;
 	int	i;
 
-	n = 0;
-	i = 0;
-	while (++i < size)
+	it1 = 0;
+	it2 = -1;
+	while (++it2 < size)
 	{
-		if (tab[i] < tab[n])
-			n = i;
+		if (tab[it2] < tab[it1])
+			it1 = it2;
 	}
-	return (n);
+	if (n == 1)
+		return (tab[it1]);
+	i = it1;
+	while (n-- > 1)
+	{
+		it1 = i;
+		it2 = -1;
+		while (++it2 < size && i == it1)
+		{
+			if (tab[it2] > tab[it1])
+				i = it2;
+		}
+		--it2;
+		while (++it2 < size)
+		{
+			if (tab[it2] < tab[i] && tab[it2] > tab[it1])
+				i = it2;
+		}
+	}
+	return (tab[i]);
 }
 
-int	get_indexbiggest(int *tab, int size)
+int	get_indexnbiggest(int *tab, int n, int size)
 {
-	int	n;
 	int	i;
 
 	n = 0;
@@ -103,33 +122,79 @@ int	get_indexbiggest(int *tab, int size)
 	return (n);
 }
 
-int	*get_next_smaller(int *tab, int size)
+int	get_id(t_tab ab, int n)
 {
-	static int	init = 0;
-	static int	n = 0;
-	int			i;
-	int			tmp;
-	int			tmp2;
+	int	i;
 
-	i = 0;
-	tmp2 = n;
-	while (!init && ++i < size)
+	i = -1;
+	while (++i < ab.sa)
 	{
-		if (tab[i] > tab[n])
-			n = i;
+		if (ab.a[i] == n)
+			return (i);
 	}
-	while (init && i < size && tab[i] >= tab[n])
-		i++;
-	tmp = i;
-	while (init && ++i < size)
+	return (0);
+}
+
+int	nchoice(t_v n)
+{
+	n.i = 0;
+	while (++n.i <= 5)
 	{
-		if (tab[i] < tab[n] && tab[tmp] < tab[i])
-			tmp = i;
-		if (i + 1 == size)
-			n = tmp;
+		n.j = 0;
+		if (n.i == 1)
+			n.rc = n.r1;
+		else if (n.i == 2)
+			n.rc = n.r2;
+		else if (n.i == 3)
+			n.rc = n.r3;
+		else if (n.i == 4)
+			n.rc = n.r4 * 2;
+		else
+			n.rc = n.r5 * 6;
+		if (n.rc >= n.r1)
+			n.j++;
+		if (n.rc >= n.r2)
+			n.j++;
+		if (n.rc >= n.r3)
+			n.j++;
+		if (n.rc >= n.r4 * 2)
+			n.j++;
+		if (n.rc >= n.r5 * 6)
+			n.j++;
+		//printf("%i = %i\n", n.i, n.j);
+		if (n.n == n.j)
+			return (n.i);
 	}
-	init = 1;
-	if (n == tmp2)
-		return (NULL);
-	return (&tab[n]);
+	return (5 - n.n + 1);
+}
+
+int	get_nclosest(t_v n, t_tab ab)
+{
+	n.n = 6 - n.n;
+	n.r1 = get_id(ab, n.min1);
+	n.r2 = get_id(ab, n.min2);
+	n.r3 = get_id(ab, n.min3);
+	n.r4 = get_id(ab, n.min4);
+	n.r5 = get_id(ab, n.min5);
+	if (n.r1 > (n.r1 - ab.sa) * -1)
+		n.r1 = (n.r1 - ab.sa) * -1;
+	if (n.r2 > (n.r2 - ab.sa) * -1)
+		n.r2 = (n.r2 - ab.sa) * -1;
+	if (n.r3 > (n.r2 - ab.sa) * -1)
+		n.r3 = (n.r3 - ab.sa) * -1;
+	if (n.r4 > (n.r4 - ab.sa) * -1)
+		n.r4 = (n.r4 - ab.sa) * -1;
+	if (n.r5 > (n.r5 - ab.sa) * -1)
+		n.r5 = (n.r5 - ab.sa) * -1;
+	n.rc = nchoice(n);
+	if (n.rc == 1)
+		return (get_id(ab, n.min1));
+	else if (n.rc == 2)
+		return (get_id(ab, n.min2));
+	else if (n.rc == 3)
+		return (get_id(ab, n.min3));
+	else if (n.rc == 4)
+		return (get_id(ab, n.min4));
+	else
+		return (get_id(ab, n.min5));
 }

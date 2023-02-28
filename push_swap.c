@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:42:41 by amery             #+#    #+#             */
-/*   Updated: 2023/01/27 15:48:29 by amery            ###   ########.fr       */
+/*   Updated: 2023/02/28 19:02:34 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char *argv[])
 {
 	t_tab	ab;
 	t_fun	f;
+	t_v		n;
 	int		i;
 
 	f.swap = &swap;
@@ -32,7 +33,8 @@ int	main(int argc, char *argv[])
 	ab.b = create_b(ab.sa);
 	if (!ab.a || !ab.b)
 		return (free_tab(ab) + ft_rerror());
-	sort(ab, f);
+	n.n = 0;
+	sort(ab, f, n);
 	/*i = -1;
 	while (++i < ab.sa || i < ab.sb)
 	{

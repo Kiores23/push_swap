@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:50:55 by amery             #+#    #+#             */
-/*   Updated: 2023/01/27 15:50:59 by amery            ###   ########.fr       */
+/*   Updated: 2023/02/28 15:20:43 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@ int	ft_issorta(int *tab, int size, int place)
 				return (0);
 			place = 0;
 		}
+		i++;
+	}
+	return (1);
+}
+
+int	ft_issortrn(int *tab, int size, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < size - 1 && i < n - 1)
+	{
+		if (tab[i] < tab[i + 1])
+			return (0);
 		i++;
 	}
 	return (1);

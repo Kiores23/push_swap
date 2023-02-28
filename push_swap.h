@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:42:44 by amery             #+#    #+#             */
-/*   Updated: 2023/01/27 16:48:15 by amery            ###   ########.fr       */
+/*   Updated: 2023/02/28 17:53:18 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ typedef struct s_v
 	int	i;
 	int	j;
 	int	n;
+	int	min1;
+	int	min2;
+	int	min3;
+	int	min4;
+	int	min5;
+	int	i_current;
+	int	r1;
+	int	r2;
+	int	r3;
+	int	r4;
+	int	r5;
+	int	rc;
 }	t_v;
 
 void	swap(t_tab ab, char *cmd);
@@ -49,14 +61,15 @@ void	push(t_tab ab, char *cmd);
 void	rotate(t_tab ab, char *cmd);
 void	choice_fun(t_tab ab, void (*f)(t_tab, char *), char *cmd);
 void	sort_rotate(t_tab ab, t_fun f);
-void	sort(t_tab ab, t_fun f);
+void	sort(t_tab ab, t_fun f, t_v n);
 void	sort_goto(t_tab ab, t_fun f, int nb);
 int		ps_verif(char **a, int size);
 int		*create_a(char **tab, int size);
 int		*create_b(int size);
 int		free_tab(t_tab ab);
-int		get_indexsmallest(int *tab, int size);
-int		get_indexbiggest(int *tab, int size);
-int		*get_next_smaller(int *tab, int size);
+int		get_nnsmallest(int *tab, int n, int size);
+int		get_indexnbiggest(int *tab, int n, int size);
+int		get_nclosest(t_v n, t_tab ab);
+int		get_id(t_tab ab, int n);
 
 #endif
