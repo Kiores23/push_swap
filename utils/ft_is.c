@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:50:55 by amery             #+#    #+#             */
-/*   Updated: 2023/02/28 15:20:43 by amery            ###   ########.fr       */
+/*   Updated: 2023/03/09 20:26:04 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,38 @@ int	ft_issorta(int *tab, int size, int place)
 		else
 		{
 			if (tab[place] > tab[0])
+				return (0);
+			place = 0;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	ft_issortra(int *tab, int size, int place)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (place < size)
+		{
+			ft_putnbr(tab[place]);
+			ft_putstr(" < ");
+			ft_putnbr(tab[place + 1]);
+			ft_putstr(" / ");
+			if (tab[place] < tab[place + 1])
+				return (0);
+			place++;
+		}
+		else
+		{
+			ft_putnbr(tab[place - 1]);
+			ft_putstr(" < ");
+			ft_putnbr(tab[0]);
+			ft_putstr(" / ");
+			if (tab[place - 1] < tab[0])
 				return (0);
 			place = 0;
 		}

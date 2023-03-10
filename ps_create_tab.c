@@ -6,11 +6,27 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:42:19 by amery             #+#    #+#             */
-/*   Updated: 2023/01/27 15:45:12 by amery            ###   ########.fr       */
+/*   Updated: 2023/03/10 17:15:43 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	putpile(t_tab ab)
+{
+	int	i;
+
+	i = -1;
+	printf("\n( A ) = ");
+	while (++i < ab.sa)
+		printf(" %i", ab.a[i]);
+	i = -1;
+	printf("\n( B ) = ");
+	while (++i < ab.sb)
+		printf(" %i", ab.b[i]);
+	printf("\n");
+	printf("\n");
+}
 
 int	free_tab(t_tab ab)
 {
@@ -21,6 +37,28 @@ int	free_tab(t_tab ab)
 	//ft_putchar('\n');
 	//system("leaks push_swap | tail -n2");
 	return (0);
+}
+
+void	create_group(t_tab ab, t_g *g)
+{
+	if (ab.sa <= 100)
+		g->s1 = ab.sa / 33 + 2;
+	else
+		g->s1 = 0.0125 * ab.sa + 3.75;
+	g->s2 = ab.sa / (g->s1);
+	g->i = 0;
+	while (g->i < g->s1)
+	{
+		g->j = 0;
+		//printf("\nGROUP %i :\n\n", g->i + 1);
+		while (g->j < g->s2 || (g->i + 1 == g->s1 && g->i * g->s2 + g->j < ab.sa))
+		{
+			g->grp[g->i][g->j] = get_nsmallest(ab.a, g->i * g->s2 + g->j + 1, ab.sa);
+			//printf("%i\n", g->grp[g->i][g->j]);
+			g->j++;
+		}
+		g->i++;
+	}
 }
 
 int	*create_a(char **tab, int size)

@@ -1,12 +1,13 @@
 
 NAME = push_swap
 
-FILES =	push_swap.c \
+FILES =	main.c \
 		ps_verif.c \
 		ps_create_tab.c \
 		ps_function.c \
 		ps_utils.c \
 		ps_sort.c \
+		ps_undersort.c \
 
 PATH_UTILS = ./utils/
 FILES_UTILS = 	$(PATH_UTILS)ft_atoi.c \
@@ -21,4 +22,4 @@ $(NAME) : $(FILES) $(FILES_UTILS)
 		gcc $(FILES) $(FILES_UTILS) -o $(NAME)
 
 f : $(FILES) $(FILES_UTILS)
-		gcc -Wall -Wextra -Werror $(FILES) $(FILES_UTILS) -o $(NAME)
+		gcc -Wall -Wextra -Werror -g -fsanitize=address $(FILES) $(FILES_UTILS) -o $(NAME)

@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:42:44 by amery             #+#    #+#             */
-/*   Updated: 2023/02/28 17:53:18 by amery            ###   ########.fr       */
+/*   Updated: 2023/03/10 17:17:04 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,39 +37,39 @@ typedef struct s_fun
 	void	(*current)(t_tab, char*);
 }			t_fun;
 
-typedef struct s_v
+typedef struct s_g
 {
 	int	i;
 	int	j;
-	int	n;
-	int	min1;
-	int	min2;
-	int	min3;
-	int	min4;
-	int	min5;
-	int	i_current;
-	int	r1;
-	int	r2;
-	int	r3;
-	int	r4;
-	int	r5;
-	int	rc;
-}	t_v;
+	int	grp[100][1000];
+	int	s1;
+	int	s2;
+}	t_g;
 
+//SORT
+void	sort(t_tab ab, t_fun f, t_g g);
+//UNDERSORT
+void	atob(t_tab ab, t_fun f, t_g g);
+//FUNCTION
 void	swap(t_tab ab, char *cmd);
 void	push(t_tab ab, char *cmd);
 void	rotate(t_tab ab, char *cmd);
-void	choice_fun(t_tab ab, void (*f)(t_tab, char *), char *cmd);
-void	sort_rotate(t_tab ab, t_fun f);
-void	sort(t_tab ab, t_fun f, t_v n);
-void	sort_goto(t_tab ab, t_fun f, int nb);
-int		ps_verif(char **a, int size);
+//PS_CREATE_TAB
+void	create_group(t_tab ab, t_g *g);
 int		*create_a(char **tab, int size);
 int		*create_b(int size);
 int		free_tab(t_tab ab);
-int		get_nnsmallest(int *tab, int n, int size);
-int		get_indexnbiggest(int *tab, int n, int size);
-int		get_nclosest(t_v n, t_tab ab);
-int		get_id(t_tab ab, int n);
+void	putpile(t_tab ab);
+//PS_UTILS
+void	choice_fun(t_tab ab, void (*f)(t_tab, char *), char *cmd);
+int		get_nsmallest(int *tab, int n, int size);
+int		get_id(int *tab, int size, int n);
+int		check_group(int *tab, int size, int *n, int nsize);
+/*
+void	sort_goto_a(t_tab ab, t_fun f, int nb);
+void	sort_goto_b(t_tab ab, t_fun f, int nb);
+*/
+//PS_VERIF
+int		ps_verif(char **a, int size);
 
 #endif
