@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:42:19 by amery             #+#    #+#             */
-/*   Updated: 2023/03/10 17:15:43 by amery            ###   ########.fr       */
+/*   Updated: 2023/03/13 20:24:06 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,24 @@ void	create_group(t_tab ab, t_g *g)
 			g->j++;
 		}
 		g->i++;
+	}
+}
+
+void	create_subgroup(int *tab, int size, t_g *g)
+{
+	g->s3 = size / 2;
+	g->j = 0;
+	while (g->j < g->s3)
+	{
+		g->subgrp[0][g->j] = get_nsmallest(tab, g->j + 1, size);
+		//printf("%i\n", g->grp[g->i][g->j]);
+		g->j++;
+	}
+	while (g->j < size)
+	{
+		g->subgrp[0][g->j] = get_nsmallest(tab, g->j + 1, size);
+		//printf("%i\n", g->grp[g->i][g->j]);
+		g->j++;
 	}
 }
 

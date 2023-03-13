@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:42:44 by amery             #+#    #+#             */
-/*   Updated: 2023/03/10 17:17:04 by amery            ###   ########.fr       */
+/*   Updated: 2023/03/13 20:23:20 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,23 @@ typedef struct s_g
 	int	grp[100][1000];
 	int	s1;
 	int	s2;
+	int	subgrp[2][500];
+	int	s3;
 }	t_g;
 
 //SORT
 void	sort(t_tab ab, t_fun f, t_g g);
 //UNDERSORT
 void	atob(t_tab ab, t_fun f, t_g g);
+void	sort_a(t_tab ab, t_fun f, t_g g);
+void	btoa(t_tab ab, t_fun f, t_g g);
 //FUNCTION
 void	swap(t_tab ab, char *cmd);
 void	push(t_tab ab, char *cmd);
 void	rotate(t_tab ab, char *cmd);
 //PS_CREATE_TAB
 void	create_group(t_tab ab, t_g *g);
+void	create_subgroup(int *tab, int size, t_g *g);
 int		*create_a(char **tab, int size);
 int		*create_b(int size);
 int		free_tab(t_tab ab);

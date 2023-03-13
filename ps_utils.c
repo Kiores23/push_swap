@@ -6,7 +6,7 @@
 /*   By: amery <amery@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:42:32 by amery             #+#    #+#             */
-/*   Updated: 2023/03/10 16:58:26 by amery            ###   ########.fr       */
+/*   Updated: 2023/03/13 16:27:57 by amery            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,7 @@ void	choice_fun(t_tab ab, void (*f)(t_tab, char *), char *cmd)
 	ab.sa = *ab.psa;
 	ab.sb = *ab.psb;
 }
-/*
-void	sort_goto_a(t_tab ab, t_fun f, int id)
-{
 
-}
-
-void	sort_goto_b(t_tab ab, t_fun f, int id)
-{
-
-}
-*/
 int	get_id(int *tab, int size, int n)
 {
 	int	i;
